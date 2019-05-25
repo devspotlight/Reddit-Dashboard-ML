@@ -28,8 +28,10 @@ def clean_data():
     # Count num of bots a trolls
     bots = my_data['is_bot'].values
     trolls = my_data['is_troll'].values
-    print("Number of bots: ", bots.sum())
-    print("Number of trolls:", trolls.sum())
+    print("Number of bot comments: ", bots.sum())
+    print("Number of bots: ", len(np.unique(bots)))
+    print("Number of troll comments:", trolls.sum())
+    print("Number of trolls:", len(np.unique(bots)))
 
     # Change 1 to 2 for a troll
     trolls = trolls * 2

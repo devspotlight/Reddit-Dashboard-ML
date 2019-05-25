@@ -1,2 +1,10 @@
+botenv
+__pycache__
+lib/data
+.vscode
+
 # CSV files
 *.csv
+
+*.pyc
+*.ipynb

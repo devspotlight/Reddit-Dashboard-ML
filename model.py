@@ -37,7 +37,7 @@ class RFModel(object):
         Randon Forest model.
 
         """
-        self.clf = RandomForestClassifier(n_estimators)
+        self.clf = RandomForestClassifier(n_estimators, max_depth=2)
 
     def train(self, X, y):
         """Train a model.
