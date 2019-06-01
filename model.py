@@ -30,6 +30,14 @@ class RFModel(object):
 
         """
         
+        my_data = my_data.decode("utf-8") 
+        my_data = my_data.replace('\\\\','\\')
+        #print(my_data)
+        
+        my_data = json.loads(my_data)
+        
+        print("follow ",my_data['no_follow'])
+        
         no_follow = bool(my_data['no_follow'])
         created_utc = int(my_data['created_utc'])
         author_verified = bool(my_data['author_verified'])

@@ -1,6 +1,6 @@
 """Create a end point for boot identification solution."""
 import os
-from flask import Flask
+from flask import Flask, request
 from flask_restful import reqparse, Api, Resource
 import pickle
 from model import RFModel
@@ -18,32 +18,6 @@ with open(clf_path, 'rb') as f:
 clean_data_path = 'lib/models/CleanData.pkl'
 with open(clean_data_path, 'rb') as f:
     model.vectorizer = pickle.load(f)
-
-# argument parsing
-parser = reqparse.RequestParser()
-
-parser.add_argument('banned_by')
-parser.add_argument('no_follow')
-parser.add_argument('link_id')
-parser.add_argument('gilded')
-parser.add_argument('author')
-parser.add_argument('author_verified')
-parser.add_argument('author_comment_karma')
-parser.add_argument('author_link_karma')
-parser.add_argument('num_comments')
-parser.add_argument('created_utc')
-parser.add_argument('score')
-parser.add_argument('over_18')
-parser.add_argument('body')
-parser.add_argument('downs')
-parser.add_argument('is_submitter')
-parser.add_argument('num_reports')
-parser.add_argument('controversiality')
-parser.add_argument('quarantine')
-parser.add_argument('ups')
-parser.add_argument('is_bot')
-parser.add_argument('is_troll')
-parser.add_argument('recent_comments')
 
 class Botidentification(Resource):
     """Class for add end points."""
@@ -67,16 +41,10 @@ class Botidentification(Resource):
         """
         app.logger.info("Received request")
         
-        # Use parser and find the user's query
-        args = parser.parse_args()
-        
-        print("recent:", args['recent_comments'])
-        
-        clean_data = model.clean_data(args)
-        print(clean_data)
+        clean_data = model.clean_data(request.data)
+        app.logger.info("Cleaned data: " + str(clean_data))
         
         prediction = model.predict(clean_data)
-        print(prediction)
 
         # Return the prediction
         if prediction == 0:
@@ -89,6 +57,7 @@ class Botidentification(Resource):
             pred_text = 'Classification error'
 
         output = {'prediction': pred_text}
+        app.logger.info(output)
         return output
 
 # Setup the Api resource routing here
