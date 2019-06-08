@@ -2,6 +2,7 @@ botenv
 __pycache__
 lib/data
 .vscode
+tree*
 
 # CSV files
 *.csv

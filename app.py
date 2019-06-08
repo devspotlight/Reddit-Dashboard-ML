@@ -4,7 +4,6 @@ from flask import Flask, request
 from flask_restful import reqparse, Api, Resource
 import pickle
 from model import RFModel
-import sys
 
 app = Flask(__name__)
 api = Api(app)
@@ -24,10 +23,8 @@ class Botidentification(Resource):
 
     def get(self):
         """HTTP GET /.
-
-        Test the server.
         """
-        return {'Status': 'The server run'}
+        return {'Please send a POST request'}
 
     def post(self):
         """HTTP POST /.
@@ -36,7 +33,7 @@ class Botidentification(Resource):
 
         Returns
         -------
-        Return if the Form Data is about a Normal user, Bot or a Troll.
+        Return if the JSON Data is about a Normal user, Bot or a Troll.
 
         """
         app.logger.info("Received request")
@@ -63,9 +60,7 @@ class Botidentification(Resource):
 # Setup the Api resource routing here
 # Route the URL to the resource
 
-
 api.add_resource(Botidentification, '/')
-
 
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 5000))

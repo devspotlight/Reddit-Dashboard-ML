@@ -1,17 +1,21 @@
-# Bot Identification
+# Bot and Troll Identification
 
-There is brief information about how this should be run and how to get involved in the project.
+This code can be used to identify bots and trolls on Reddit. It's part of a two part blog series.
 
-Do a local clone:
+There is a brief guide on how to run the code. There are notebooks used for training a model and code to run a Flask server with the predictions API. It also includes Procfile so you can quickly run the API on Heroku.
+
+First, do a local clone:
 
 ```bash
-git clone https://github.com/TopengineerOrg/botidentification.git
+git clone https://github.com/devspotlight/botidentification.git
 cd botidentification
 git checkout comments/dataset
 
 ```
 
-## Create a dir inside the `lib` folder nameth `data`
+## Download the training data
+
+Create a dir inside the `lib` folder named `data` 
 
 ```bash
 mkdir lib
@@ -19,11 +23,11 @@ cd lib
 mkdir data
 ```
 
-Now download comments dataset from (https://drive.google.com/file/d/122jWdX3ma2UBpz3eJzNj_2JUcfE4BNhs/view) in your new `data` folder.
+Now download the comments dataset as a CSV file into your new `data` folder. You can download the bots and trolls training data [here](https://drive.google.com/file/d/1FDvHMLbJ8mXlsiiNnLgFCV6Yom1m_xbU/view?usp=sharing). For normal user training data, you can dump the data from Redshift to a CSV file.
 
 ## Installation
 
-First steps before begin with the installations. Make sure to get installed the next libraries:
+Please first install Python 3 and Jupyter.
 
 ### Python 3
 
@@ -66,24 +70,29 @@ source myvenv/bin/activate
 pip install -r requirements.txt
 ```
 
-## Getting started
+### Jupyter
 
-Clean comment dataset
+Follow the (Jupyter installation instructions](https://jupyter.org/install). You can then open it by running:
 
-```bash
-python clean_data.py
 ```
-
-Run the Model
-
-```bash
-python useridentification.py
+jupyter notebook
 ```
 
 
-## More...
+## Running the code
 
-Detailed documentation about this project can be found inside `docs/`.
+Clean comment dataset 
+* `clean_data_bots_trolls.ipynb`
+* `clean_data_normies.ipynb`
+
+Build the model:
+* `user_identification.ipynb`
+
+Run the Flask API
+
+```bash
+python app.py
+```
 
 
 

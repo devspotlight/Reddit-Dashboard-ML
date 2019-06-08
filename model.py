@@ -11,22 +11,17 @@ import difflib
 
 
 class RFModel(object):
-    """Build Randon Forest Model for save this in .pkl file."""
-    def __init__(self):
-        """Define function for create .pkl file."""
-        #self.clf = DecisionTreeClassifier()
-        #self.clean
 
     def clean_data(self, my_data):
         """Clean a dataframe.
 
         Parameters
         ----------
-        my_data -- data for clean
+        my_data -- a JSON object from a POST request
 
         Returns
         -------
-        Clean data.
+        Clean feature data ready to be used by the ML model
 
         """
         
@@ -118,15 +113,15 @@ class RFModel(object):
                  recent_avg_sentiment_polarity, recent_min_sentiment_polarity]]
 
     def create(self, max_depth):
-        """Create a Random Forest Model.
+        """Create a decision tree.
 
         Parameters
         ----------
-        n_estimator -- parameter for Random Forest Model.
+        max_depth -- Maximum depth of the decision tree.
 
         Returns
         -------
-        Randon Forest model.
+        Decision tree model.
 
         """
         self.clf = DecisionTreeClassifier(max_depth=max_depth, class_weight={0:1,1:2.5,2:5}, min_samples_leaf=100)
