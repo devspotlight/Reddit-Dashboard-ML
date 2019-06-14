@@ -3,9 +3,9 @@ __pycache__
 lib/data
 .vscode
 tree*
+.ipynb_checkpoints
 
 # CSV files
 *.csv
 
 *.pyc
-*.ipynb
