@@ -31,8 +31,6 @@ class RFModel(object):
         
         my_data = json.loads(my_data)
         
-        print("follow ",my_data['no_follow'])
-        
         no_follow = bool(my_data['no_follow'])
         created_utc = int(my_data['created_utc'])
         author_verified = bool(my_data['author_verified'])
@@ -124,7 +122,9 @@ class RFModel(object):
         Decision tree model.
 
         """
-        self.clf = DecisionTreeClassifier(max_depth=max_depth, class_weight={0:1,1:2.5,2:5}, min_samples_leaf=100)
+        self.clf = DecisionTreeClassifier(max_depth=3, 
+                                          class_weight={'normal':1, 'bot':2.5, 'troll':5}, 
+                                          min_samples_leaf=100)
 
     def train(self, X, y):
         """Train a model.
@@ -180,7 +180,7 @@ class RFModel(object):
         -------
         """
         with open(path, 'wb') as f:
-            pickle.dump(self.train, f)
+            pickle.dump(self.clf, f)
 
         print("Pickled classifier at {}".format(path))
 

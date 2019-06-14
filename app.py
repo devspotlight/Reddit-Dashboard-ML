@@ -5,8 +5,8 @@ from flask_restful import reqparse, Api, Resource
 import pickle
 from model import RFModel
 
-app = Flask(__name__)
-api = Api(app)
+application = Flask(__name__)
+api = Api(application)
 
 model = RFModel()
 
@@ -36,25 +36,25 @@ class Botidentification(Resource):
         Return if the JSON Data is about a Normal user, Bot or a Troll.
 
         """
-        app.logger.info("Received request")
+        application.logger.info("Received request")
         
         clean_data = model.clean_data(request.data)
-        app.logger.info("Cleaned data: " + str(clean_data))
+        application.logger.info("Cleaned data: " + str(clean_data))
         
         prediction = model.predict(clean_data)
 
         # Return the prediction
-        if prediction == 0:
-            pred_text = 'Is a normal user'
-        elif prediction == 1:
-            pred_text = 'Is a Bot'
-        elif prediction == 2:
-            pred_text = 'Is a Troll'
+        if prediction == 'normal':
+            pred_text = 'normal user'
+        elif prediction == 'bot':
+            pred_text = 'possible bot'
+        elif prediction == 'troll':
+            pred_text = 'possible troll'
         else:
             pred_text = 'Classification error'
 
         output = {'prediction': pred_text}
-        app.logger.info(output)
+        application.logger.info(output)
         return output
 
 # Setup the Api resource routing here
@@ -63,5 +63,5 @@ class Botidentification(Resource):
 api.add_resource(Botidentification, '/')
 
 if __name__ == '__main__':
-    port = int(os.environ.get("PORT", 5000))
-    app.run(debug=True, host='0.0.0.0', port=port)
+    port = int(os.environ.get("PORT", 8000))
+    application.run(debug=True, host='0.0.0.0', port=port)
