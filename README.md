@@ -1,6 +1,6 @@
 # Machine Learning API to Identify Bots and Trolls
 
-This code can be used to identify bots and trolls on Reddit. It's part of a two part blog series the first covering how to build a moderator dashboard and the second covering this machine learning model.
+This code can be used to identify bots and trolls on Reddit. It's part of a two part blog series the first covering how to build a moderator dashboard and the second covering this machine learning model. The dashboard repository can be found here https://github.com/devspotlight/Reddit-Dashboard
 
 There is a brief guide on how to run the code. There are notebooks used for training a model and code to run a Flask server with the predictions API. It also includes Procfile so you can quickly run the API on Heroku.
 
