@@ -1,7 +1,7 @@
 aniso8601==4.1.0
 attrs==17.4.0
 backcall==0.1.0
-bleach==3.1.0
+bleach==3.1.2
 botocore==1.12.105
 certifi==2018.11.29
 chalice==1.7.0
